@@ -26,6 +26,7 @@ import { createNavigationKubernetesDashboardEntry } from './kubernetes/navigatio
 import { createNavigationKubernetesDeploymentsEntry } from './kubernetes/navigation-registry-k8s-deployments.svelte';
 import { createNavigationKubernetesIngressesRoutesEntry } from './kubernetes/navigation-registry-k8s-ingresses-routes.svelte';
 import { createNavigationKubernetesNodesEntry } from './kubernetes/navigation-registry-k8s-nodes.svelte';
+import { createNavigationKubernetesPodsEntry } from './kubernetes/navigation-registry-k8s-pods.svelte';
 import { createNavigationKubernetesPersistentVolumeEntry } from './kubernetes/navigation-registry-k8s-persistent-volume.svelte';
 import { createNavigationKubernetesServicesEntry } from './kubernetes/navigation-registry-k8s-services.svelte';
 import type { NavigationRegistryEntry } from './navigation-registry';
@@ -42,6 +43,7 @@ export function createNavigationKubernetesGroup(): NavigationRegistryEntry {
   newItems.push(createNavigationKubernetesDashboardEntry());
   newItems.push(createNavigationKubernetesNodesEntry());
   newItems.push(createNavigationKubernetesDeploymentsEntry());
+  newItems.push(createNavigationKubernetesPodsEntry());
   newItems.push(createNavigationKubernetesServicesEntry());
   newItems.push(createNavigationKubernetesIngressesRoutesEntry());
   newItems.push(createNavigationKubernetesPersistentVolumeEntry());

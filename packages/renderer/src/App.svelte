@@ -75,6 +75,8 @@ import { lastSubmenuPages } from './stores/breadcrumb';
 import { kubernetesCurrentContextState } from './stores/kubernetes-contexts-state';
 import { navigationRegistry } from './stores/navigation/navigation-registry';
 import SubmenuNavigation from './SubmenuNavigation.svelte';
+import KubePodsList from './lib/kube/pods/KubePodsList.svelte';
+import KubePodDetails from './lib/kube/pods/KubePodDetails.svelte';
 
 router.mode.memory();
 
@@ -254,6 +256,16 @@ window.events?.receive('navigate', (navigationRequest: unknown) => {
           </Route>
           <Route path="/kubernetes/nodes/:name/*" breadcrumb="Node Details" let:meta navigationHint="details">
             <NodeDetails name={decodeURI(meta.params.name)} />
+          </Route>
+          <Route path="/kubernetes/pods" breadcrumb="Pods" navigationHint="root">
+            <KubePodsList />
+          </Route>
+          <Route
+            path="/kubernetes/pods/:name/:namespace/*"
+            breadcrumb="Pod Details"
+            let:meta
+            navigationHint="details">
+            <KubePodDetails name={decodeURI(meta.params.name)} namespace={decodeURI(meta.params.namespace)} />
           </Route>
           <Route path="/kubernetes/persistentvolumeclaims" breadcrumb="Persistent Volume Claims" navigationHint="root">
             <PVCList />

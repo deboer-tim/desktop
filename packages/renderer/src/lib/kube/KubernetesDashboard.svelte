@@ -7,6 +7,7 @@ import {
   kubernetesCurrentContextDeployments,
   kubernetesCurrentContextIngresses,
   kubernetesCurrentContextNodes,
+  kubernetesCurrentContextPods,
   kubernetesCurrentContextPersistentVolumeClaims,
   kubernetesCurrentContextRoutes,
   kubernetesCurrentContextSecrets,
@@ -25,12 +26,14 @@ import ServiceIcon from '../images/ServiceIcon.svelte';
 import KubernetesDashboardGuideCard from './KubernetesDashboardGuideCard.svelte';
 import KubernetesDashboardResourceCard from './KubernetesDashboardResourceCard.svelte';
 import KubernetesEmptyPage from './KubernetesEmptyPage.svelte';
+import PodIcon from '../images/PodIcon.svelte';
 
 let noContexts = $derived($kubernetesCurrentContextState.error === NO_CURRENT_CONTEXT_ERROR);
 let currentContextName = $derived($kubernetesContexts.find(context => context.currentContext)?.name);
 
 let nodeCount = $derived($kubernetesCurrentContextNodes.length);
 let deploymentCount = $derived($kubernetesCurrentContextDeployments.length);
+let podCount = $derived($kubernetesCurrentContextPods.length);
 let serviceCount = $derived($kubernetesCurrentContextServices.length);
 let ingressRouteCount = $derived($kubernetesCurrentContextIngresses.length + $kubernetesCurrentContextRoutes.length);
 let pvcCount = $derived($kubernetesCurrentContextPersistentVolumeClaims.length);
@@ -70,6 +73,7 @@ async function openKubernetesDocumentation(): Promise<void> {
                     <div class="grid grid-cols-4 gap-4">
                         <KubernetesDashboardResourceCard type='Nodes' Icon={NodeIcon} count={nodeCount} link='/kubernetes/nodes'/>
                         <KubernetesDashboardResourceCard type='Deployments' Icon={DeploymentIcon} count={deploymentCount} link='/kubernetes/deployments'/>
+                        <KubernetesDashboardResourceCard type='Pods' Icon={PodIcon} count={podCount} link='/kubernetes/pods'/>
                         <KubernetesDashboardResourceCard type='Services' Icon={ServiceIcon} count={serviceCount} link='/kubernetes/services'/>
                         <KubernetesDashboardResourceCard type='Ingresses & Routes' Icon={IngressRouteIcon} count={ingressRouteCount} link='/kubernetes/ingressesRoutes'/>
                         <KubernetesDashboardResourceCard type='Persistent Volume Claims' Icon={PvcIcon} count={pvcCount} link='/kubernetes/persistentvolumeclaims'/>
